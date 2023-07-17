@@ -19,12 +19,12 @@ data "azurerm_kubernetes_cluster" "existing" {
 locals {
   oidc_issuer_url  = data.azurerm_kubernetes_cluster.existing.oidc_issuer_url
   kubelet_identity = data.azurerm_kubernetes_cluster.existing.kubelet_identity[0].object_id
-  
+
   host                   = data.azurerm_kubernetes_cluster.existing.kube_config.0.host
   client_certificate     = base64decode(data.azurerm_kubernetes_cluster.existing.kube_config.0.client_certificate)
   client_key             = base64decode(data.azurerm_kubernetes_cluster.existing.kube_config.0.client_key)
   cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.existing.kube_config.0.cluster_ca_certificate)
-} 
+}
 
 provider "kubernetes" {
   host                   = local.host

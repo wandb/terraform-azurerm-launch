@@ -18,8 +18,8 @@ module "blob" {
   source               = "./modules/blob"
   storage_account_name = "${var.namespace}${var.prefix}sa" #only lowercase letters and numbers
   container_name       = "${var.namespace}${var.prefix}"   #only lowercase letters and numbers
-  location            = local.resource_group_location
-  resource_group_name = local.resource_group_name
+  location             = local.resource_group_location
+  resource_group_name  = local.resource_group_name
 }
 
 module "acr" {
