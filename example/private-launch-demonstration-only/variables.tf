@@ -21,12 +21,6 @@ variable "create_resource_group" {
   default     = true
 }
 
-variable "create_aks_cluster" {
-  description = "Flag to create a aks cluster"
-  type        = bool
-  default     = true
-}
-
 # launch-helm variables
 variable "helm_repository" {
   description = "Helm repository URL"

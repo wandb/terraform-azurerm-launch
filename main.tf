@@ -1,109 +1,53 @@
-provider "azurerm" {
-  subscription_id = var.subscription_id
-  features {}
-}
-
-resource "random_id" "prefix" {
-  byte_length = 4
-}
-
-resource "azurerm_resource_group" "launch_rg" {
-  count = var.create_resource_group ? 1 : 0
-
+resource "azurerm_resource_group" "launch" {
+  count    = var.create_resource_group ? 1 : 0
+  name     = var.resource_group_name
   location = var.location
-  name     = "${var.namespace}-${random_id.prefix.hex}-rg"
 }
 
-## TODO If we ever want to pass multiple RG's or support people bringing their own 
-## ACR or Object storage, we will need logic like this:
-# locals {
-#   resource_group = {
-#     name     = var.create_resource_group ? azurerm_resource_group.main[0].name : var.resource_group_name
-#     location = var.location
-#   }
-# }
-
-module "networking" {
-  source              = "./modules/networking"
-  namespace           = "${var.namespace}-${random_id.prefix.hex}"
-  resource_group_name = azurerm_resource_group.launch_rg.0.name
-  location            = azurerm_resource_group.launch_rg.0.location
-
-  tags       = var.tags
-  depends_on = [azurerm_resource_group.launch_rg]
+data "azurerm_resource_group" "launch" {
+  count = var.create_resource_group ? 0 : 1
+  name  = var.resource_group_name
 }
 
-module "aks" {
-  count  = var.create_aks_cluster ? 1 : 0
-  source = "./modules/aks"
-
-  name                = "${var.namespace}-${random_id.prefix.hex}-cluster"
-  resource_group_name = azurerm_resource_group.launch_rg.0.name
-  location            = azurerm_resource_group.launch_rg.0.location
-  cluster_subnet_id   = module.networking.private_subnet.id
-
-  azurerm_container_registry_id = module.acr.0.azurerm_container_registry_id
-
-  node_count = var.node_count
-
-  depends_on = [
-    module.networking.private_subnet,
-    module.acr.azurerm_container_registry_id
-  ]
+locals {
+  resource_group_name     = var.create_resource_group ? azurerm_resource_group.launch[0].name : data.azurerm_resource_group.launch[0].name
+  resource_group_location = var.create_resource_group ? azurerm_resource_group.launch[0].location : data.azurerm_resource_group.launch[0].location
 }
 
 module "blob" {
-  count                = 1
   source               = "./modules/blob"
-  storage_account_name = "${var.namespace}${random_id.prefix.hex}sa" #only lowercase letters and numbers
-  container_name       = "${var.namespace}${random_id.prefix.hex}"   #only lowercase letters and numbers
-  resource_group_name  = azurerm_resource_group.launch_rg.0.name
-  location             = azurerm_resource_group.launch_rg.0.location
+  storage_account_name = "${var.namespace}${var.prefix}sa" #only lowercase letters and numbers
+  container_name       = "${var.namespace}${var.prefix}"   #only lowercase letters and numbers
+  location            = local.resource_group_location
+  resource_group_name = local.resource_group_name
 }
 
 module "acr" {
-  count               = 1
   source              = "./modules/acr"
-  registry_name       = "${var.namespace}${random_id.prefix.hex}reg" #only lowercase letters and numbers
-  resource_group_name = azurerm_resource_group.launch_rg.0.name
-  location            = azurerm_resource_group.launch_rg.0.location
+  registry_name       = "${var.namespace}${var.prefix}reg" #only lowercase letters and numbers
+  location            = local.resource_group_location
+  resource_group_name = local.resource_group_name
   tags                = var.tags
 }
 
 module "workload_identity" {
-  count               = 1
   source              = "./modules/workload-identity"
-  identity_name       = "${var.namespace}-${random_id.prefix.hex}-workload-id"
-  resource_group_name = azurerm_resource_group.launch_rg.0.name
-  location            = azurerm_resource_group.launch_rg.0.location
+  identity_name       = "${var.namespace}-${var.prefix}-workload-id"
+  resource_group_name = local.resource_group_name
+  location            = local.resource_group_location
 
-  oidc_issuer        = module.aks.0.cluster_oidc_issuer_url
-  storage_account_id = module.blob.0.storage_account_id
-  acr_id             = module.acr.0.azurerm_container_registry_id
-}
-
-provider "kubernetes" {
-  host                   = module.aks.0.cluster_host
-  client_certificate     = base64decode(module.aks.0.cluster_client_certificate)
-  client_key             = base64decode(module.aks.0.cluster_client_key)
-  cluster_ca_certificate = base64decode(module.aks.0.cluster_ca_certificate)
-}
-
-provider "helm" {
-  kubernetes {
-    host                   = module.aks.0.cluster_host
-    client_certificate     = base64decode(module.aks.0.cluster_client_certificate)
-    client_key             = base64decode(module.aks.0.cluster_client_key)
-    cluster_ca_certificate = base64decode(module.aks.0.cluster_ca_certificate)
-  }
+  oidc_issuer        = var.aks_oidc_issuer_url
+  kubelet_identity   = var.kubelet_identity
+  storage_account_id = module.blob.storage_account_id
+  acr_id             = module.acr.azurerm_container_registry_id
 }
 
 locals {
-  container_registry_uri  = "${module.acr.0.azurerm_container_registry_uri}${var.namespace}-${random_id.prefix.hex}"
-  build_context_store_uri = module.blob.0.build_context_store_uri
+  container_registry_uri  = "${module.acr.azurerm_container_registry_uri}${var.namespace}-${var.prefix}"
+  build_context_store_uri = module.blob.build_context_store_uri
 
   service_account_annotations = {
-    "azure.workload.identity/client-id" = module.workload_identity.0.workload_identity_client_id
+    "azure.workload.identity/client-id" = module.workload_identity.workload_identity_client_id
   }
 
   agent_labels = {
@@ -128,7 +72,7 @@ module "launch" {
 
   # TF defined inputs
   service_account_annotations = local.service_account_annotations
-  azure_storage_access_key    = module.blob.0.storage_access_key
+  azure_storage_access_key    = module.blob.storage_access_key
   agent_labels                = local.agent_labels
 
   # Launch Config 

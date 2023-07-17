@@ -37,11 +37,6 @@ variable "default_node_pool_name" {
   default     = "default"
 }
 
-variable "azurerm_container_registry_id" {
-  description = "ACR ID for the ARCPull Role attachement"
-  type        = string
-}
-
 variable "node_count" {
   description = "Number of nodes in the AKS cluster"
   type        = number

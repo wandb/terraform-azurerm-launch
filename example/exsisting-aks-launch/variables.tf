@@ -1,10 +1,12 @@
-variable "namespace" {
-  description = "Unique namespace name for your resources"
+# Infra variables
+
+variable "subscription_id" {
+  description = "The Azure subscription ID is a unique identifier that represents your subscription to Microsoft Azure."
   type        = string
 }
 
-variable "prefix" {
-  description = "Prefix for your resources"
+variable "namespace" {
+  description = "The namespace is a user-defined name that provides a unique identifier for organizing and grouping your resources within Azure."
   type        = string
 }
 
@@ -14,23 +16,18 @@ variable "location" {
 }
 
 variable "create_resource_group" {
-  description = "The 'create_resource_group' variable is a boolean flag that determines whether to create a resource group (RG) in Azure or use an exsisting one."
+  description = "The 'create_resource_group' variable is a boolean flag that determines whether to create a resource group (RG) in Azure."
   type        = bool
   default     = true
 }
 
 variable "resource_group_name" {
-  description = "The name of the resource group"
+  description = "The name of the resource group to create"
   type        = string
 }
 
-variable "aks_oidc_issuer_url" {
-  description = "The URL of the OpenID issuer, only applicable when using Azure AD pod identity"
-  type        = string
-}
-
-variable "kubelet_identity" {
-  description = "The kubelet identity to use for the acr pull federation"
+variable "aks_cluster_name" {
+  description = "The name of the aks cluster to deploy the launch helm chart to"
   type        = string
   nullable    = false
 }

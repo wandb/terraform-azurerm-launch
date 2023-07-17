@@ -22,3 +22,7 @@ output "cluster_ca_certificate" {
 output "cluster_oidc_issuer_url" {
   value = azurerm_kubernetes_cluster.launch_cluster.oidc_issuer_url
 }
+
+output "kubelet_identity" {
+  value = azurerm_kubernetes_cluster.launch_cluster.kubelet_identity[0].object_id
+}

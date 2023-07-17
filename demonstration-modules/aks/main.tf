@@ -40,9 +40,3 @@ resource "azurerm_kubernetes_cluster" "launch_cluster" {
     ]
   }
 }
-
-resource "azurerm_role_assignment" "acrpull_role" {
-  scope                = var.azurerm_container_registry_id
-  role_definition_name = "AcrPull"
-  principal_id         = azurerm_kubernetes_cluster.launch_cluster.kubelet_identity[0].object_id
-}
