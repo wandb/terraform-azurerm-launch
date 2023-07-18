@@ -43,8 +43,9 @@ provider "helm" {
 }
 
 module "launch" {
-  source  = "wandb/launch/azurerm"
-  version = "1.0.0"
+  source = "../../"
+  # source  = "wandb/launch/azurerm"
+  # version = "1.0.0"
 
   # Infra variables
   subscription_id       = var.subscription_id
