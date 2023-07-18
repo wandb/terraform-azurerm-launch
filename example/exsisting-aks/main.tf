@@ -48,7 +48,6 @@ module "launch" {
   # version = "1.0.0"
 
   # Infra variables
-  subscription_id       = var.subscription_id
   namespace             = var.namespace
   prefix                = random_id.prefix.hex
   location              = data.azurerm_resource_group.existing.location
@@ -65,7 +64,6 @@ module "launch" {
   agent_image_pull_policy      = var.agent_image_pull_policy
   agent_resources              = var.agent_resources
   k8s_namespace                = var.k8s_namespace
-  node_count                   = var.node_count
   base_url                     = var.base_url
   volcano                      = var.volcano
   git_creds                    = var.git_creds

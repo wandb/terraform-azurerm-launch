@@ -4,7 +4,7 @@ resource "azurerm_user_assigned_identity" "workload_identity" {
   location            = var.location
 }
 
-resource "azurerm_federated_identity_credential" "example" {
+resource "azurerm_federated_identity_credential" "launch_serviceaccount" {
   name                = var.identity_name
   resource_group_name = var.resource_group_name
   audience            = var.audiences

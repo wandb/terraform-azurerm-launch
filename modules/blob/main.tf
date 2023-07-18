@@ -1,4 +1,4 @@
-resource "azurerm_storage_account" "storage_account" {
+resource "azurerm_storage_account" "launch" {
   name                     = var.storage_account_name
   resource_group_name      = var.resource_group_name
   location                 = var.location
@@ -9,6 +9,6 @@ resource "azurerm_storage_account" "storage_account" {
 
 resource "azurerm_storage_container" "build_context_store" {
   name                  = var.container_name
-  storage_account_name  = azurerm_storage_account.storage_account.name
+  storage_account_name  = azurerm_storage_account.launch
   container_access_type = var.container_access_type
 }
