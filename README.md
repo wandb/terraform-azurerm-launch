@@ -88,7 +88,6 @@ module "launch" {
 4. Run `terraform apply -var-file="your.tfvars"` to apply the changes.
 
 <!-- BEGIN_TF_DOCS -->
-
 ## Requirements
 
 | Name | Version |
@@ -153,7 +152,6 @@ module "launch" {
 | Name | Description |
 |------|-------------|
 | <a name="output_helm_release_status"></a> [helm\_release\_status](#output\_helm\_release\_status) | Status of the helm release |
-
 <!-- END_TF_DOCS -->
 
 ## Examples
