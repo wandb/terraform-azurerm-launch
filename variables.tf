@@ -82,12 +82,6 @@ variable "k8s_namespace" {
   default     = "wandb"
 }
 
-variable "node_count" {
-  description = "Number of nodes in the AKS cluster"
-  type        = number
-  default     = 3
-}
-
 variable "base_url" {
   description = "W&B api url"
   type        = string

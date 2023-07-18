@@ -89,6 +89,7 @@ module "launch" {
 4. Run `terraform apply -var-file="your.tfvars"` to apply the changes.
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name | Version |
@@ -142,7 +143,6 @@ module "launch" {
 | <a name="input_max_jobs"></a> [max\_jobs](#input\_max\_jobs) | The maximum number of jobs | `string` | `"5"` | no |
 | <a name="input_max_schedulers"></a> [max\_schedulers](#input\_max\_schedulers) | The maximum number of schedulers | `string` | `"8"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Unique namespace name for your resources | `string` | n/a | yes |
-| <a name="input_node_count"></a> [node\_count](#input\_node\_count) | Number of nodes in the AKS cluster | `number` | `3` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix for your resources | `string` | n/a | yes |
 | <a name="input_queues"></a> [queues](#input\_queues) | The list of queues to be used | `list(string)` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group | `string` | n/a | yes |
@@ -154,6 +154,7 @@ module "launch" {
 | Name | Description |
 |------|-------------|
 | <a name="output_helm_release_status"></a> [helm\_release\_status](#output\_helm\_release\_status) | Status of the helm release |
+
 <!-- END_TF_DOCS -->
 
 ## Examples
