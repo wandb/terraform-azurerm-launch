@@ -7,7 +7,7 @@ This directory provides an example of setting up a launch agent into an exsistin
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
 ```
-enabled in order to configure the [Azure Workload Identity](`https://learn.microsoft.com/en-us/azure/aks/workload-identity-deploy-cluster`) needed to pull and bush build contexts to and from the Azure Container Registry and Blob Storage Containers.
+enabled in order to configure the [Azure Workload Identity](`https://learn.microsoft.com/en-us/azure/aks/workload-identity-deploy-cluster`) needed to pull and push build contexts to and from the Azure Container Registry and Blob Storage Container.
 
 If this needs to be confugured manually, please run:
 ```bash

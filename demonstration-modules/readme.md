@@ -8,7 +8,7 @@ Users should have an exsisting AKS Compute Cluster which may have serveral GPU o
 
 ## Contents
 
-This repository consists of two main modules:
+This folder consists of two main modules:
 
 1. **AKS Module:** This module outlines the creation of an Azure Kubernetes Service (AKS) cluster.
 2. **Networking Module:** This module provides an example of setting up network resources in Azure, such as virtual networks and private subnets.
@@ -17,7 +17,7 @@ You can find these modules used in an example at `terraform-azurerm-launch/examp
 
 ## Usage
 
-To see these modules in action, navigate to the `private-launch-demonstration-only` directory in the `terraform-azurerm-launch/example` repository. Here, you'll find Terraform configurations that make use of these demonstration modules.
+To see these modules in action, navigate to the `private-launch-demonstration-only` directory in the `terraform-azurerm-launch/example` dirrectory. Here, you'll find example Terraform configurations that make use of these demonstration modules.
 
 ## Important Notice
 
