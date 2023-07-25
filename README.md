@@ -138,8 +138,8 @@ module "launch" {
 | <a name="input_k8s_namespace"></a> [k8s\_namespace](#input\_k8s\_namespace) | Namespace to deploy launch agent into | `string` | `"wandb"` | no |
 | <a name="input_kubelet_identity"></a> [kubelet\_identity](#input\_kubelet\_identity) | The kubelet identity to use for the acr pull federation | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The location refers to the physical region or datacenter where your Azure resources are deployed. | `string` | n/a | yes |
-| <a name="input_max_jobs"></a> [max\_jobs](#input\_max\_jobs) | The maximum number of jobs | `string` | `"5"` | no |
-| <a name="input_max_schedulers"></a> [max\_schedulers](#input\_max\_schedulers) | The maximum number of schedulers | `string` | `"8"` | no |
+| <a name="input_max_jobs"></a> [max\_jobs](#input\_max\_jobs) | The maximum number of jobs | `number` | `5` | no |
+| <a name="input_max_schedulers"></a> [max\_schedulers](#input\_max\_schedulers) | The maximum number of schedulers | `number` | `8` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Unique namespace name for your resources | `string` | n/a | yes |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix for your resources | `string` | n/a | yes |
 | <a name="input_queues"></a> [queues](#input\_queues) | The list of queues to be used | `list(string)` | n/a | yes |
