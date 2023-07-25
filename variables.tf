@@ -32,7 +32,6 @@ variable "aks_oidc_issuer_url" {
 variable "kubelet_identity" {
   description = "The kubelet identity to use for the acr pull federation"
   type        = string
-  nullable    = false
 }
 
 # launch-helm variables
@@ -121,14 +120,14 @@ variable "entity" {
 
 variable "max_jobs" {
   description = "The maximum number of jobs"
-  type        = string
-  default     = "5"
+  type        = number
+  default     = 5
 }
 
 variable "max_schedulers" {
   description = "The maximum number of schedulers"
-  type        = string
-  default     = "8"
+  type        = number
+  default     = 8
 }
 
 variable "tags" {

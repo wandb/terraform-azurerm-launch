@@ -67,7 +67,7 @@ resource "azurerm_kubernetes_cluster" "launch" {
 
   lifecycle {
     ignore_changes = [
-      microsoft_defender, // ignores changes to the "microsoft_defender" block
+      microsoft_defender,
     ]
   }
 }
@@ -90,8 +90,7 @@ provider "helm" {
 
 module "launch" {
   source = "../../"
-  # version = "1.0.1"
-
+  
   # Infra variables
   namespace             = var.namespace
   prefix                = random_id.prefix.hex

@@ -124,14 +124,14 @@ variable "entity" {
 
 variable "max_jobs" {
   description = "The maximum number of jobs"
-  type        = string
-  default     = "5"
+  type        = number
+  default     = 5
 }
 
 variable "max_schedulers" {
   description = "The maximum number of schedulers"
-  type        = string
-  default     = "8"
+  type        = number
+  default     = 8
 }
 
 variable "tags" {

@@ -35,7 +35,6 @@ variable "oidc_issuer" {
 variable "kubelet_identity" {
   description = "The kubelet identity to use for the acr pull federation"
   type        = string
-  nullable    = false
 }
 
 variable "subject" {
