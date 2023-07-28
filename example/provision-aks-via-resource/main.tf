@@ -90,7 +90,7 @@ provider "helm" {
 
 module "launch" {
   source = "../../"
-  
+
   # Infra variables
   namespace             = var.namespace
   prefix                = random_id.prefix.hex

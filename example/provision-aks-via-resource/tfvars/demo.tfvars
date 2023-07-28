@@ -5,9 +5,9 @@ location        = "eastus"
 
 # launch-helm variables
 # helm_repository       = https://wandb.github.io/helm-charts
-helm_chart_version    = "0.8.0"
-agent_api_key         = "local-3..."
-agent_image           = "wandb/launch-agent-dev:f0cf9e0a"
+helm_chart_version = "0.8.0"
+agent_api_key      = "local-3..."
+agent_image        = "wandb/launch-agent-dev:f0cf9e0a"
 # We will create the resource group, this variable just tells the root module
 # not to try and create the resource group again.
 create_resource_group = false
