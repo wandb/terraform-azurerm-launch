@@ -9,6 +9,6 @@ resource "azurerm_storage_account" "launch" {
 
 resource "azurerm_storage_container" "build_context_store" {
   name                  = var.container_name
-  storage_account_name  = azurerm_storage_account.launch
+  storage_account_name  = azurerm_storage_account.launch.name
   container_access_type = var.container_access_type
 }
