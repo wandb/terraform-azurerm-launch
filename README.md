@@ -123,11 +123,11 @@ module "launch" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_target_namespaces"></a> [additional\_target\_namespaces](#input\_additional\_target\_namespaces) | Additional target namespaces that the launch agent can deploy into | `list(string)` | <pre>[<br>  "wandb",<br>  "default"<br>]</pre> | no |
+| <a name="input_additional_target_namespaces"></a> [additional\_target\_namespaces](#input\_additional\_target\_namespaces) | Additional target namespaces that the launch agent can deploy into | `list(string)` | <pre>[<br/>  "wandb",<br/>  "default"<br/>]</pre> | no |
 | <a name="input_agent_api_key"></a> [agent\_api\_key](#input\_agent\_api\_key) | The Weights and Biases team service account API key | `string` | n/a | yes |
 | <a name="input_agent_image"></a> [agent\_image](#input\_agent\_image) | Container image to use for the agent | `string` | n/a | yes |
 | <a name="input_agent_image_pull_policy"></a> [agent\_image\_pull\_policy](#input\_agent\_image\_pull\_policy) | Image pull policy for agent image | `string` | `"Always"` | no |
-| <a name="input_agent_resources"></a> [agent\_resources](#input\_agent\_resources) | Resources block for the agent spec | <pre>object({<br>    limits = map(string)<br>  })</pre> | <pre>{<br>  "limits": {<br>    "cpu": "1",<br>    "memory": "1Gi"<br>  }<br>}</pre> | no |
+| <a name="input_agent_resources"></a> [agent\_resources](#input\_agent\_resources) | Resources block for the agent spec | <pre>object({<br/>    limits = map(string)<br/>  })</pre> | <pre>{<br/>  "limits": {<br/>    "cpu": "1",<br/>    "memory": "1Gi"<br/>  }<br/>}</pre> | no |
 | <a name="input_aks_oidc_issuer_url"></a> [aks\_oidc\_issuer\_url](#input\_aks\_oidc\_issuer\_url) | The URL of the OpenID issuer, only applicable when using Azure AD pod identity | `string` | n/a | yes |
 | <a name="input_base_url"></a> [base\_url](#input\_base\_url) | W&B api url | `string` | n/a | yes |
 | <a name="input_create_resource_group"></a> [create\_resource\_group](#input\_create\_resource\_group) | The 'create\_resource\_group' variable is a boolean flag that determines whether to create a resource group (RG) in Azure or use an exsisting one. | `bool` | `true` | no |
